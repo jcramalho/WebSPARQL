@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  div(class="w3-container")
+    header(class="w3-container w3-center w3-teal")
+      h1 Gestão de Processos de Equivalência
+  div(class="w3-container")
+    header(class="w3-container w3-light-grey")
+      h4 Novo Processo:
+  div(class="w3-card-4")
+    form(class="w3-container" method="POST" action="/processos/processo")
+      div(class="w3-row")
+        div(class="w3-col s6")
+          input(class="w3-input" type="text" placeholder="Identificador do processo" name="processo")
+          input(class="w3-input" type="text" placeholder="Identificador do aluno" name="idAluno")
+          input(class="w3-input" type="text" placeholder="Nome do aluno" name="nomeAluno")
+        div(class="w3-col s6")
+          input(class="w3-input" type="text" placeholder="Instituição de proveniência" name="instProv")
+          input(class="w3-input" type="text" placeholder="Curso de proveniência" name="cursoProv")
+          input(class="w3-btn w3-light-grey" type="submit" value="Adicionar")
+  div(class="w3-container")
+    header(class="w3-container w3-center w3-teal")
+      h2 Lista de Processos de Equivalência
+  div(class="w3-container")
+    table(class="w3-table-all")
+      tr
+        th Data
+        th Processo
+        th #Aluno
+        th Nome
+        th Instituição
+        th Curso
+      each p in lproc
+        tr
+          td= p.data
+          td
+            a(href="/processos/processo/" + p._id)= p.processo
+          td= p.idAluno
+          td= p.nomeAluno
+          td= p.instProv
+          td= p.cursoProv
+  div(class="w3-container")
+    footer(class="w3-container w3-teal")
+      address Gerado por GEquiv :: jcr :: 2017-Dezembro
