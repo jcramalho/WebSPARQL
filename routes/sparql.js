@@ -27,7 +27,7 @@ router.post('/input', function(req, res, next){
     client.query(query)
         .execute()
         .then(function (qres) {
-            console.log('\n\nTipo: ' + typeof(qres) + '\n\n')
+            console.log('\n\n\n')
             console.log(JSON.stringify(qres))
             res.json(qres)
         })

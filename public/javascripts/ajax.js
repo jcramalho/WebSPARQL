@@ -8,12 +8,21 @@ $(function(){
           url: '/sparql/input',
           dataType: 'JSON'
       }).done(function(response){
-        var html = "<pre>"
+        var colunas = response.head.vars
+        var html = "<table class='w3-table-all'>\n"
+        html += "<tr>"
+        for(var col in colunas)
+            html += "<th>" + colunas[col] + "</th>"
+        html += "</tr>\n"
+        
         for (var key in response.results.bindings) {
-            html += response.results.bindings[key].cod.value + '\n'
+            var linha = response.results.bindings[key]
+            html += "<tr>"
+            for(var col in colunas)
+                html += "<td>" + linha[colunas[col]].value + "</td>"
         }
-        //html += JSON.stringify(response.results.bindings)
-        html += "</pre>"
+        html += "</tr>"
+        html += "</table>"
 
         $("#resultado").append(html)
       })
